@@ -104,7 +104,14 @@ def get_max_salary(path):
     int
         The maximum salary paid out of all job opportunities
     """
-    pass
+
+    docs_list = read(path)
+    max_salaries = [
+        int(doc["max_salary"])
+        for doc in docs_list if doc["max_salary"].isdigit()
+    ]
+
+    return max(max_salaries)
 
 
 def get_min_salary(path):
