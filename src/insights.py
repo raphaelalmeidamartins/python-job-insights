@@ -129,6 +129,7 @@ def get_min_salary(path):
     int
         The minimum salary paid out of all job opportunities
     """
+
     docs_list = read(path)
     min_salaries = [
         int(doc["min_salary"])
@@ -161,7 +162,23 @@ def matches_salary_range(job, salary):
         If `job["min_salary"]` is greather than `job["max_salary"]`
         If `salary` isn't a valid integer
     """
-    pass
+
+    min_salary = job.get("min_salary")
+    max_salary = job.get("max_salary")
+
+    if min_salary is None or max_salary is None:
+        raise ValueError
+
+    if type(min_salary) is not int or type(max_salary) is not int:
+        raise ValueError
+
+    if min_salary > max_salary:
+        raise ValueError
+
+    if type(salary) is not int:
+        raise ValueError
+
+    return min_salary <= salary <= max_salary
 
 
 def filter_by_salary_range(jobs, salary):
