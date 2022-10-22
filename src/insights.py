@@ -57,7 +57,14 @@ def get_unique_industries(path):
     list
         List of unique industries
     """
-    return []
+
+    docs_list = read(path)
+    industries = {
+        doc["industry"]
+        for doc in docs_list if doc["industry"] != ""
+    }
+
+    return industries
 
 
 def filter_by_industry(jobs, industry):
