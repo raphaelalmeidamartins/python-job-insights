@@ -1,3 +1,6 @@
+from .jobs import read
+
+
 def get_unique_job_types(path):
     """Checks all different job types and returns a list of them
 
@@ -13,7 +16,11 @@ def get_unique_job_types(path):
     list
         List of unique job types
     """
-    return []
+
+    docs_list = read(path)
+    job_types = {doc["job_type"] for doc in docs_list}
+
+    return job_types
 
 
 def filter_by_job_type(jobs, job_type):
@@ -31,7 +38,8 @@ def filter_by_job_type(jobs, job_type):
     list
         List of jobs with provided job_type
     """
-    return []
+
+    return [job for job in jobs if job['job_type'] == job_type]
 
 
 def get_unique_industries(path):
