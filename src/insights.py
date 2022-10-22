@@ -18,7 +18,10 @@ def get_unique_job_types(path):
     """
 
     docs_list = read(path)
-    job_types = {doc["job_type"] for doc in docs_list}
+    job_types = {
+        doc["job_type"]
+        for doc in docs_list if doc["job_type"] != ""
+    }
 
     return job_types
 
